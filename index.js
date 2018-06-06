@@ -23,9 +23,12 @@ var resolveProxyReqPath          = require('./app/steps/resolveProxyReqPath');
 var sendProxyRequest             = require('./app/steps/sendProxyRequest');
 var sendUserRes                  = require('./app/steps/sendUserRes');
 
-module.exports = function proxy(host, userOptions) {
-
+module.exports = function proxy(relays, userOptions) {
+    // relays must be delivered
   return function handleProxy(req, res, next) {
+    let url = req.url;
+    let id = url.split("/")[2];
+    let host = relays.addr(id);
     debug('[start proxy] ' + req.path);
     var container = new ScopeContainer(req, res, next, host, userOptions);
 
