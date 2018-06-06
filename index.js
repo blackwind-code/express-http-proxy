@@ -24,7 +24,6 @@ var sendProxyRequest             = require('./app/steps/sendProxyRequest');
 var sendUserRes                  = require('./app/steps/sendUserRes');
 
 module.exports = function proxy(host, userOptions) {
-  assert(host, 'Host should not be empty');
 
   return function handleProxy(req, res, next) {
     debug('[start proxy] ' + req.path);
@@ -55,4 +54,3 @@ module.exports = function proxy(host, userOptions) {
       });
   };
 };
-
